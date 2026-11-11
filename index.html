@@ -1048,137 +1048,211 @@
         </section>
 
         <!-- ==========================================
-             MỤC 4: KHẢO SÁT NHU CẦU
+               MỤC 4: KHẢO SÁT NHU CẦU
         =========================================== -->
-        <section id="tab-survey" class="tab-section py-12">
-            <div class="max-w-4xl mx-auto px-4">
-                <div class="text-center mb-10">
+<section id="tab-survey" class="tab-section py-12">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center max-w-3xl mx-auto mb-10">
                     <span class="text-xs font-semibold uppercase tracking-widest text-bamboo-700 bg-bamboo-100 px-3 py-1 rounded-full">
                         Lắng nghe &amp; Thấu hiểu
                     </span>
                     <h2 class="font-serif text-3xl sm:text-4xl font-bold text-bamboo-800 mt-3 mb-3">
-                        Khảo Sát Nhu Cầu Nơi Ở Khi Về Già
+                        Khảo Sát Nhu Cầu Nơi Ở Tuổi Xế Chiều
                     </h2>
-                    <p class="text-stone-600 max-w-2xl mx-auto">
-                        Mỗi câu trả lời của bạn giúp cộng đồng hiểu rõ hơn về mong muốn thực sự của người trẻ dành cho cha mẹ, cũng như nguyện vọng của chính chúng ta về một mái ấm bình yên khi tuổi già ghé lại.
+                    <p class="text-stone-600 text-sm sm:text-base">
+                        Mỗi ý kiến đóng góp của bạn đều giúp cộng đồng thấu hiểu hơn tâm tư của người trẻ và người lớn tuổi, đồng thời cập nhật trực tiếp vào biểu đồ thống kê các tỉnh/thành phố bên phải.
                     </p>
                 </div>
 
-                <!-- Box Kết Nối Nhanh Tới Google Form Chính Thức -->
-                <div class="bg-bamboo-800 text-white rounded-3xl p-6 sm:p-8 mb-10 shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-amber-300 mb-2">
-                            Biểu Mẫu Khảo Sát Chính Thức (Google Form)
+                <!-- Bố cục 2 cột: Trái (Form khảo sát) | Phải (Biểu đồ tỉnh thành tự động tăng) -->
+                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- CỘT TRÁI (7 CỘT): FORM KHẢO SÁT -->
+                    <form id="peaceful-survey-form" onsubmit="submitSurveyForm(event)" class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-warm-200 space-y-5">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-stone-700 mb-2">1. Tên hoặc biệt danh của bạn *</label>
+                                <input type="text" id="survey-name" required placeholder="Nhập tên hoặc biệt danh..." class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-bamboo-600">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-stone-700 mb-2">2. Độ tuổi của bạn *</label>
+                                <select id="survey-age" required class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-bamboo-600">
+                                    <option value="">-- Chọn nhóm tuổi --</option>
+                                    <option value="Dưới 25 tuổi">Dưới 25 tuổi (Học sinh, sinh viên, người trẻ)</option>
+                                    <option value="Từ 25 - 40 tuổi">Từ 25 – 40 tuổi (Đang xây dựng sự nghiệp, gia đình)</option>
+                                    <option value="Từ 41 - 59 tuổi">Từ 41 – 59 tuổi (Chuẩn bị bước sang tuổi xế chiều)</option>
+                                    <option value="Từ 60 tuổi trở lên">Từ 60 tuổi trở lên (Người cao tuổi)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-stone-700 mb-2">3. Bạn đang sinh sống ở Tỉnh / Thành phố nào? *</label>
+                            <select id="survey-location" required class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-bamboo-600">
+                                <option value="">-- Chọn Tỉnh / Thành phố trên cả nước --</option>
+                                <optgroup label="Miền Nam">
+                                    <option value="Đồng Nai">Đồng Nai</option>
+                                    <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                                    <option value="Bình Dương">Bình Dương</option>
+                                    <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                                    <option value="Bình Phước">Bình Phước</option>
+                                    <option value="Tây Ninh">Tây Ninh</option>
+                                    <option value="Long An">Long An</option>
+                                    <option value="Tiền Giang">Tiền Giang</option>
+                                    <option value="Bến Tre">Bến Tre</option>
+                                    <option value="Vĩnh Long">Vĩnh Long</option>
+                                    <option value="Trà Vinh">Trà Vinh</option>
+                                    <option value="Đồng Tháp">Đồng Tháp</option>
+                                    <option value="An Giang">An Giang</option>
+                                    <option value="Kiên Giang">Kiên Giang</option>
+                                    <option value="Cần Thơ">Cần Thơ</option>
+                                    <option value="Hậu Giang">Hậu Giang</option>
+                                    <option value="Sóc Trăng">Sóc Trăng</option>
+                                    <option value="Bạc Liêu">Bạc Liêu</option>
+                                    <option value="Cà Mau">Cà Mau</option>
+                                </optgroup>
+                                <optgroup label="Miền Trung & Tây Nguyên">
+                                    <option value="Lâm Đồng">Lâm Đồng</option>
+                                    <option value="Đắk Lắk">Đắk Lắk</option>
+                                    <option value="Đắk Nông">Đắk Nông</option>
+                                    <option value="Gia Lai">Gia Lai</option>
+                                    <option value="Kon Tum">Kon Tum</option>
+                                    <option value="Bình Thuận">Bình Thuận</option>
+                                    <option value="Ninh Thuận">Ninh Thuận</option>
+                                    <option value="Khánh Hòa">Khánh Hòa</option>
+                                    <option value="Phú Yên">Phú Yên</option>
+                                    <option value="Bình Định">Bình Định</option>
+                                    <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                    <option value="Quảng Nam">Quảng Nam</option>
+                                    <option value="Đà Nẵng">Đà Nẵng</option>
+                                    <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                                    <option value="Quảng Trị">Quảng Trị</option>
+                                    <option value="Quảng Bình">Quảng Bình</option>
+                                    <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                    <option value="Nghệ An">Nghệ An</option>
+                                    <option value="Thanh Hóa">Thanh Hóa</option>
+                                </optgroup>
+                                <optgroup label="Miền Bắc">
+                                    <option value="Hà Nội">Hà Nội</option>
+                                    <option value="Hải Phòng">Hải Phòng</option>
+                                    <option value="Quảng Ninh">Quảng Ninh</option>
+                                    <option value="Bắc Ninh">Bắc Ninh</option>
+                                    <option value="Bắc Giang">Bắc Giang</option>
+                                    <option value="Hải Dương">Hải Dương</option>
+                                    <option value="Hưng Yên">Hưng Yên</option>
+                                    <option value="Thái Bình">Thái Bình</option>
+                                    <option value="Nam Định">Nam Định</option>
+                                    <option value="Ninh Bình">Ninh Bình</option>
+                                    <option value="Hà Nam">Hà Nam</option>
+                                    <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                    <option value="Phú Thọ">Phú Thọ</option>
+                                    <option value="Thái Nguyên">Thái Nguyên</option>
+                                    <option value="Bắc Kạn">Bắc Kạn</option>
+                                    <option value="Cao Bằng">Cao Bằng</option>
+                                    <option value="Lạng Sơn">Lạng Sơn</option>
+                                    <option value="Tuyên Quang">Tuyên Quang</option>
+                                    <option value="Hà Giang">Hà Giang</option>
+                                    <option value="Lào Cai">Lào Cai</option>
+                                    <option value="Yên Bái">Yên Bái</option>
+                                    <option value="Lai Châu">Lai Châu</option>
+                                    <option value="Điện Biên">Điện Biên</option>
+                                    <option value="Sơn La">Sơn La</option>
+                                    <option value="Hòa Bình">Hòa Bình</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-stone-700 mb-2">
+                                4. Bạn tìm hiểu không gian sống tuổi xế chiều cho ai? *
+                            </label>
+                            <div class="grid sm:grid-cols-3 gap-3">
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 cursor-pointer hover:bg-bamboo-50 transition">
+                                    <input type="radio" name="survey-target" value="Cho ông bà, cha mẹ" required class="text-bamboo-700">
+                                    <span class="text-sm text-stone-700">Cho ông bà, cha mẹ</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 cursor-pointer hover:bg-bamboo-50 transition">
+                                    <input type="radio" name="survey-target" value="Cho bản thân trong tương lai" class="text-bamboo-700">
+                                    <span class="text-sm text-stone-700">Cho chính bản thân</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 cursor-pointer hover:bg-bamboo-50 transition">
+                                    <input type="radio" name="survey-target" value="Cho cả cha mẹ và bản thân" class="text-bamboo-700">
+                                    <span class="text-sm text-stone-700">Cả cha mẹ &amp; bản thân</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-stone-700 mb-2">
+                                5. Điều bạn mong muốn nhất ở một "Nơi Bình Yên Ghé Lại" khi về già là gì? *
+                            </label>
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <label class="flex items-start gap-3 p-3.5 rounded-xl border border-stone-200 cursor-pointer hover:bg-bamboo-50 transition">
+                                    <input type="radio" name="survey-wish" value="Có bạn đồng trang lứa trò chuyện, sẻ chia" required class="mt-1 text-bamboo-700">
+                                    <span class="text-sm text-stone-700">Có bạn bè đồng trang lứa cùng trò chuyện, sinh hoạt văn nghệ, thể thao</span>
+                                </label>
+                                <label class="flex items-start gap-3 p-3.5 rounded-xl border border-stone-200 cursor-pointer hover:bg-bamboo-50 transition">
+                                    <input type="radio" name="survey-wish" value="Không gian thiên nhiên yên bình, chăm sóc sức khỏe chu đáo" class="mt-1 text-bamboo-700">
+                                    <span class="text-sm text-stone-700">Không gian xanh mát, yên bình, có người theo dõi và chăm sóc sức khỏe hàng ngày</span>
+                                </label>
+                                <label class="flex items-start gap-3 p-3.5 rounded-xl border border-stone-200 cursor-pointer hover:bg-bamboo-50 transition">
+                                    <input type="radio" name="survey-wish" value="Gần gũi gia đình để con cháu dễ dàng ghé thăm" class="mt-1 text-bamboo-700">
+                                    <span class="text-sm text-stone-700">Gần nơi ở của con cháu để cuối tuần gia đình sum họp ấm cúng</span>
+                                </label>
+                                <label class="flex items-start gap-3 p-3.5 rounded-xl border border-stone-200 cursor-pointer hover:bg-bamboo-50 transition">
+                                    <input type="radio" name="survey-wish" value="Xóa bỏ tâm lý cô đơn và áp lực cho con cái" class="mt-1 text-bamboo-700">
+                                    <span class="text-sm text-stone-700">Giúp cha mẹ sống vui khỏe mà con cái cũng an tâm làm việc, học tập</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-stone-700 mb-2">
+                                6. Tâm tư hoặc lời nhắn nhủ của bạn về chữ Hiếu trong nhịp sống hiện đại
+                            </label>
+                            <textarea id="survey-note" rows="3" placeholder="Chia sẻ suy nghĩ của bạn..." class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-bamboo-600"></textarea>
+                        </div>
+
+                        <div class="pt-2 text-center">
+                            <button type="submit" id="survey-submit-btn" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-bamboo-700 hover:bg-bamboo-800 text-white font-semibold shadow-md transition">
+                                Gửi kết quả khảo sát
+                            </button>
+                            <p id="survey-status-msg" class="text-sm text-bamboo-700 font-semibold mt-3 hidden">
+                                ✅ Cảm ơn bạn đã sẻ chia! Biểu đồ tỉnh/thành phố bên phải đã được cộng thêm +1.
+                            </p>
+                        </div>
+                    </form>
+
+                    <!-- CỘT PHẢI (5 CỘT): BIỂU ĐỒ NƠI Ở TỰ ĐỘNG TĂNG -->
+                    <div class="lg:col-span-5 lg:sticky lg:top-24 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-warm-200">
+                        <h3 class="font-serif text-2xl font-bold text-bamboo-800 mb-4 pb-3 border-b border-stone-100">
+                            📊 Biểu Đồ Nơi Ở Người Khảo Sát
                         </h3>
-                        <p class="text-sm text-stone-200 leading-relaxed">
-                            Bạn có thể trả lời nhanh các câu hỏi tóm tắt bên dưới hoặc mở trực tiếp biểu mẫu Google Form đầy đủ của dự án để gửi ý kiến đóng góp.
-                        </p>
-                    </div>
-                    <a href="https://forms.gle/GfBjzjvDdaFaSkZF8" target="_blank" rel="noopener noreferrer"
-                       class="shrink-0 px-6 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold text-sm shadow-lg transition">
-                        Mở Google Form Khảo Sát &nearr;
-                    </a>
-                </div>
 
-                <!-- Form Khảo Sát Tương Tác Trực Tiếp Trên Web -->
-                <form id="localSurveyForm" onsubmit="handleSurveySubmit(event)" class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-warm-200 space-y-7">
-                    <h3 class="font-serif text-2xl font-bold text-bamboo-800 border-b border-stone-200 pb-3">
-                        Phiếu Khảo Sát Nhanh Trực Tuyến
-                    </h3>
+                        <div class="flex items-center justify-between bg-bamboo-50 border border-bamboo-200 px-4 py-3 rounded-2xl mb-4">
+                            <span class="text-sm font-medium text-stone-700">Tổng số lượt đã tham gia:</span>
+                            <span id="survey-total-count" class="text-xl font-bold text-bamboo-800">0 người</span>
+                        </div>
 
-                    <!-- Câu 1: Độ tuổi -->
-                    <div>
-                        <label class="block font-semibold text-stone-800 mb-3">
-                            1. Độ tuổi hiện tại của bạn thuộc nhóm nào? <span class="text-rose-600">*</span>
-                        </label>
-                        <div class="grid sm:grid-cols-2 gap-3">
-                            <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 hover:bg-warm-50 cursor-pointer">
-                                <input type="radio" name="age" value="Dưới 25 tuổi (Học sinh, sinh viên, người trẻ)" required class="accent-bamboo-700 w-4 h-4">
-                                <span class="text-sm">Dưới 25 tuổi (Học sinh, sinh viên, người trẻ)</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 hover:bg-warm-50 cursor-pointer">
-                                <input type="radio" name="age" value="Từ 25 - 40 tuổi (Đang lập nghiệp, có gia đình nhỏ)" class="accent-bamboo-700 w-4 h-4">
-                                <span class="text-sm">Từ 25 – 40 tuổi (Đang lập nghiệp, có gia đình nhỏ)</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 hover:bg-warm-50 cursor-pointer">
-                                <input type="radio" name="age" value="Từ 41 - 59 tuổi (Chuẩn bị cho giai đoạn nghỉ ngơi)" class="accent-bamboo-700 w-4 h-4">
-                                <span class="text-sm">Từ 41 – 59 tuổi (Chuẩn bị cho giai đoạn nghỉ ngơi)</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 hover:bg-warm-50 cursor-pointer">
-                                <input type="radio" name="age" value="Từ 60 tuổi trở lên (Bậc cao niên)" class="accent-bamboo-700 w-4 h-4">
-                                <span class="text-sm">Từ 60 tuổi trở lên (Bậc cao niên)</span>
-                            </label>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span id="survey-filter-label" class="text-xs text-stone-500">
+                                Đang xếp hạng các tỉnh/thành có người tham gia
+                            </span>
+                            <button type="button" id="toggle-all-provinces-btn" onclick="toggleAllSurveyProvinces()" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-warm-100 hover:bg-warm-200 text-bamboo-800 transition shrink-0">
+                                Hiện đủ 63 tỉnh
+                            </button>
+                        </div>
+
+                        <!-- Danh sách các thanh biểu đồ -->
+                        <div id="survey-chart-container" class="custom-scrollbar max-h-[460px] overflow-y-auto space-y-3.5 pr-1">
+                            <!-- Được vẽ tự động bằng JS -->
                         </div>
                     </div>
 
-                    <!-- Câu 2: Mục đích khảo sát -->
-                    <div>
-                        <label class="block font-semibold text-stone-800 mb-3">
-                            2. Mục đích chính khi bạn quan tâm đến chủ đề "Nơi ở khi về già" là gì? <span class="text-rose-600">*</span>
-                        </label>
-                        <div class="space-y-3">
-                            <label class="flex items-start gap-3 p-3.5 rounded-xl border border-stone-200 hover:bg-warm-50 cursor-pointer">
-                                <input type="radio" name="purpose" value="Mong muốn tìm nơi ở bình yên, chu đáo cho ông bà / cha mẹ khi lớn tuổi" required class="accent-bamboo-700 w-4 h-4 mt-1">
-                                <span class="text-sm">Tôi là người con/cháu, mong muốn cha mẹ khi lớn tuổi có một không gian sống an vui, có người bầu bạn và chăm sóc chu đáo.</span>
-                            </label>
-                            <label class="flex items-start gap-3 p-3.5 rounded-xl border border-stone-200 hover:bg-warm-50 cursor-pointer">
-                                <input type="radio" name="purpose" value="Mong muốn định hướng nơi ở cho chính bản thân mình khi về già" class="accent-bamboo-700 w-4 h-4 mt-1">
-                                <span class="text-sm">Tôi suy nghĩ cho chính bản thân mình sau này khi về già sẽ sống ở đâu để tự chủ, bình yên và không tạo áp lực lên con cháu.</span>
-                            </label>
-                            <label class="flex items-start gap-3 p-3.5 rounded-xl border border-stone-200 hover:bg-warm-50 cursor-pointer">
-                                <input type="radio" name="purpose" value="Quan tâm cho cả cha mẹ hiện tại và bản thân trong tương lai" class="accent-bamboo-700 w-4 h-4 mt-1">
-                                <span class="text-sm">Cả hai mục đích trên: vừa lo cho cha mẹ hiện tại, vừa chuẩn bị tâm thế cho bản thân khi về già.</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Câu 3: Góc nhìn về định kiến xã hội -->
-                    <div>
-                        <label class="block font-semibold text-stone-800 mb-3">
-                            3. Theo bạn, rào cản lớn nhất khiến người con ngần ngại khi nghĩ đến việc để cha mẹ sinh hoạt tại một ngôi nhà chung dành cho người lớn tuổi là gì?
-                        </label>
-                        <select name="stigma" class="w-full p-3.5 rounded-xl border border-stone-300 bg-warm-50 text-sm focus:outline-none focus:border-bamboo-700">
-                            <option value="Định kiến xã hội và lời bàn tán rằng con cái chưa tròn chữ hiếu">Định kiến xã hội và lời bàn tán xung quanh cho rằng như vậy là chưa tròn chữ hiếu</option>
-                            <option value="Tâm lý cha mẹ sợ xa con cháu, muốn ở tại ngôi nhà quen thuộc">Tâm lý cha mẹ muốn gắn bó với ngôi nhà cũ và sợ cảm giác xa con cháu</option>
-                            <option value="Bản thân người con cảm thấy áy náy trong lòng">Bản thân người con tự cảm thấy áy náy dù biết nơi đó chăm sóc rất tốt</option>
-                            <option value="Chưa tìm được không gian thực sự gần gũi như gia đình">Chưa tìm được không gian thực sự ấm cúng, gần gũi với văn hóa truyền thống Việt</option>
-                        </select>
-                    </div>
-
-                    <!-- Câu 4: Mong muốn về không gian -->
-                    <div>
-                        <label class="block font-semibold text-stone-800 mb-2">
-                            4. Hình dung của bạn về một "Nơi Bình Yên Ghé Lại" lý tưởng cho tuổi già là như thế nào?
-                        </label>
-                        <textarea name="wish" rows="3" placeholder="Ví dụ: Có vườn cây xanh mát, có những người bạn đồng trang lứa cùng đánh cờ, thưởng trà, cuối tuần con cháu đến thăm và sum họp..."
-                                  class="w-full p-3.5 rounded-xl border border-stone-300 bg-warm-50 text-sm focus:outline-none focus:border-bamboo-700"></textarea>
-                    </div>
-
-                    <!-- Nút Gửi -->
-                    <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
-                        <button type="submit" class="px-7 py-3.5 rounded-full bg-bamboo-700 hover:bg-bamboo-800 text-white font-semibold text-sm shadow transition">
-                            Ghi nhận câu trả lời &amp; Tiếp tục tới Google Form
-                        </button>
-                        <a href="https://forms.gle/GfBjzjvDdaFaSkZF8" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-amber-700 hover:underline">
-                            Đi thẳng tới link Google Form &rarr;
-                        </a>
-                    </div>
-                </form>
-
-                <!-- Thông báo sau khi bấm gửi trên web -->
-                <div id="surveyResultBox" class="hidden mt-6 bg-bamboo-50 border-2 border-bamboo-500 rounded-2xl p-6 text-bamboo-900">
-                    <h4 class="font-serif text-xl font-bold mb-2">Cảm ơn bạn đã sẻ chia cùng "Nơi Bình Yên Ghé Lại"!</h4>
-                    <p id="surveySummaryText" class="text-sm mb-4 leading-relaxed"></p>
-                    <a href="https://forms.gle/GfBjzjvDdaFaSkZF8" target="_blank" rel="noopener noreferrer"
-                       class="inline-block px-6 py-2.5 rounded-full bg-bamboo-700 text-white text-sm font-semibold hover:bg-bamboo-800 transition">
-                        Hoàn tất gửi trên biểu mẫu Google Form chính thức &nearr;
-                    </a>
                 </div>
             </div>
         </section>
-
-    </main>
-
     <!-- FOOTER -->
     <footer class="bg-bamboo-900 text-stone-300 py-10 mt-16 border-t border-bamboo-800">
         <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
@@ -1193,7 +1267,7 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT XỬ LÝ CHUYỂN TAB, ĐIỂN TÍCH TRUYỀN THỐNG, BẢN ĐỒ ĐỒNG NAI MỚI (95 XÃ/PHƯỜNG) & VIỆT NAM (7 VÙNG) -->
+ <!-- JAVASCRIPT XỬ LÝ CHUYỂN TAB, ĐIỂN TÍCH TRUYỀN THỐNG, BẢN ĐỒ ĐỒNG NAI MỚI (95 XÃ/PHƯỜNG) & VIỆT NAM (7 VÙNG) -->
     <script>
         // 1. Chuyển đổi giữa 4 chuyên mục lớn
         function switchTab(tabName) {
@@ -1243,8 +1317,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 9 Phường/Xã',
                     title: 'Thành phố Biên Hòa',
                     wards: '9 đơn vị: Biên Hòa, Trấn Biên, Long Bình, Tam Hiệp, Phước Tân, Tam Phước, Long Hưng, Hố Nai, Trảng Dài.',
-                    pop: '~98.500 người',
-                    rate: '11,8% dân số',
+                    pop: '~1.059.525 người (NCT: ~114.400)',
+                    rate: '10,8% dân số',
                     context: 'Đô thị trung tâm đông dân bậc nhất với nhịp sống công nghiệp sôi động. Phần lớn người trẻ đi làm từ sáng sớm đến tối muộn, nhiều ông bà ở các phường Trấn Biên, Tam Hiệp, Long Bình, Hố Nai ở nhà một mình suốt ngày dài.',
                     dilemma: 'Con cái rất hiếu thảo nhưng kiệt sức giữa công việc và con nhỏ; dù biết các không gian an dưỡng rất chu đáo nhưng vẫn e ngại định kiến xung quanh đánh giá là chưa tròn chữ hiếu.'
                 },
@@ -1252,8 +1326,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 2 Phường',
                     title: 'Thành phố Đồng Xoài',
                     wards: '2 đơn vị: Bình Phước, Đồng Xoài.',
-                    pop: '~14.200 người',
-                    rate: '11,2% dân số',
+                    pop: '153.797 người (NCT: ~15.100)',
+                    rate: '9,8% dân số',
                     context: 'Đô thị hạt nhân phía Bắc của tỉnh Đồng Nai mới, nơi tập trung nhiều cơ quan hành chính và các gia đình trẻ năng động.',
                     dilemma: 'Nhiều gia đình trẻ bận rộn công tác suốt tuần, mong muốn cha mẹ có không gian sinh hoạt văn hóa, dưỡng sinh cùng bạn đồng trang lứa nhưng vẫn gần nhà để cuối tuần đón về.'
                 },
@@ -1261,7 +1335,7 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 5 Phường/Xã',
                     title: 'Thành phố Long Khánh',
                     wards: '5 đơn vị: Long Khánh, Bảo Vinh, Xuân Lập, Hàng Gòn, Bình Lộc.',
-                    pop: '~21.600 người',
+                    pop: '~197.705 người (NCT: ~26.500)',
                     rate: '13,4% dân số',
                     context: 'Thành phố xanh mát với khí hậu ôn hòa, nhiều vườn cây ăn trái lâu năm và tỷ lệ người cao tuổi sinh sống khá cao.',
                     dilemma: 'Thế hệ con cháu nhiều người đi làm việc xa tại các khu đô thị lớn, để lại cha mẹ già tự chăm sóc nhau trong những ngôi nhà vườn rộng lớn.'
@@ -1270,8 +1344,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 2 Phường',
                     title: 'Thị xã Bình Long',
                     wards: '2 đơn vị: Bình Long, An Lộc.',
-                    pop: '~8.400 người',
-                    rate: '12,9% dân số',
+                    pop: '77.268 người (NCT: ~8.900)',
+                    rate: '11,5% dân số',
                     context: 'Đô thị giàu truyền thống lịch sử tại phía Bắc tỉnh, các gia đình sống gắn bó lâu đời nhưng lớp trẻ ngày càng dịch chuyển theo công việc hiện đại.',
                     dilemma: 'Người cao tuổi tại An Lộc, Bình Long rất coi trọng tình làng nghĩa xóm, mong có các câu lạc bộ và không gian sinh hoạt tuổi già ấm cúng.'
                 },
@@ -1279,8 +1353,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 2 Phường',
                     title: 'Thị xã Phước Long',
                     wards: '2 đơn vị: Phước Bình, Phước Long.',
-                    pop: '~7.800 người',
-                    rate: '12,5% dân số',
+                    pop: '78.806 người (NCT: ~8.800)',
+                    rate: '11,2% dân số',
                     context: 'Nằm dưới chân núi Bà Rá với cảnh quan thiên nhiên trong lành, yên tĩnh, rất phù hợp cho sức khỏe người lớn tuổi.',
                     dilemma: 'Khi con cái bận rộn mưu sinh, cha mẹ lớn tuổi rất cần người bầu bạn và theo dõi sức khỏe thường xuyên thay vì lủi thủi một mình.'
                 },
@@ -1288,8 +1362,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 6 Xã',
                     title: 'Huyện Lộc Ninh',
                     wards: '6 đơn vị: Lộc Thành, Lộc Ninh, Lộc Hưng, Lộc Tấn, Lộc Thạnh, Lộc Quang.',
-                    pop: '~15.300 người',
-                    rate: '12,1% dân số',
+                    pop: '~139.227 người (NCT: ~15.000)',
+                    rate: '10,8% dân số',
                     context: 'Khu vực biên giới phía Tây Bắc của tỉnh với diện tích rộng, nhiều gia đình gắn bó với nông nghiệp và cây công nghiệp.',
                     dilemma: 'Khoảng cách địa lý giữa các xã khá xa, người trẻ đi làm ăn xa luôn canh cánh nỗi lo khi cha mẹ ở quê tuổi cao sức yếu.'
                 },
@@ -1297,8 +1371,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 3 Xã',
                     title: 'Huyện Bù Đốp',
                     wards: '3 đơn vị: Tân Tiến, Thiện Hưng, Hưng Phước.',
-                    pop: '~6.900 người',
-                    rate: '11,9% dân số',
+                    pop: '~68.058 người (NCT: ~7.000)',
+                    rate: '10,3% dân số',
                     context: 'Vùng đất yên bình phía Bắc, nhịp sống chậm rãi và truyền thống gia đình gắn kết.',
                     dilemma: 'Nhiều người con đi học và lập nghiệp ở xa, mong muốn cha mẹ ở quê có cộng đồng người cao tuổi chăm sóc lẫn nhau mỗi ngày.'
                 },
@@ -1306,8 +1380,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 4 Xã',
                     title: 'Huyện Bù Gia Mập',
                     wards: '4 đơn vị: Bù Gia Mập, Đăk Ơ, Phú Nghĩa, Đa Kia.',
-                    pop: '~8.700 người',
-                    rate: '11,4% dân số',
+                    pop: '~89.724 người (NCT: ~8.600)',
+                    rate: '9,6% dân số',
                     context: 'Khu vực có Vườn quốc gia Bù Gia Mập xanh mát, đa dạng văn hóa các dân tộc cùng chung sống hòa thuận.',
                     dilemma: 'Con cái đi làm nương rẫy hoặc công tác xa từ sáng đến tối, việc chăm sóc sức khỏe kịp thời cho ông bà lớn tuổi luôn là nỗi trăn trở lớn.'
                 },
@@ -1315,8 +1389,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 6 Xã',
                     title: 'Huyện Bù Đăng',
                     wards: '6 đơn vị: Phước Sơn, Bù Đăng, Nghĩa Trung, Thọ Sơn, Đăk Nhau, Bom Bo.',
-                    pop: '~16.800 người',
-                    rate: '12,2% dân số',
+                    pop: '~161.387 người (NCT: ~16.300)',
+                    rate: '10,1% dân số',
                     context: 'Vùng đất rộng lớn giàu bản sắc văn hóa (nổi tiếng với sóc Bom Bo), nhiều thế hệ khai hoang lập nghiệp nay đã bước vào tuổi xế chiều.',
                     dilemma: 'Lớp trẻ bận rộn với nhịp sống mới, luôn mong ông bà có nơi sinh hoạt tinh thần vui vẻ mà không bị định kiến xã hội phán xét.'
                 },
@@ -1324,8 +1398,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 4 Xã',
                     title: 'Huyện Phú Riềng',
                     wards: '4 đơn vị: Bình Tân, Long Hà, Phú Riềng, Phú Trung.',
-                    pop: '~10.900 người',
-                    rate: '11,7% dân số',
+                    pop: '~108.213 người (NCT: ~10.900)',
+                    rate: '10,1% dân số',
                     context: 'Nằm ở trung tâm khu vực phía Bắc tỉnh, gắn liền với truyền thống nông trường cao su lâu đời và nhiều thế hệ công nhân hưu trí.',
                     dilemma: 'Các bậc hưu trí rất cần không gian giao lưu, ôn lại kỷ niệm cùng bạn già khi con cháu bận rộn công việc hàng ngày.'
                 },
@@ -1333,8 +1407,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 4 Xã',
                     title: 'Huyện Hớn Quản',
                     wards: '4 đơn vị: Tân Quan, Tân Hưng, Tân Khai, Minh Đức.',
-                    pop: '~11.400 người',
-                    rate: '11,5% dân số',
+                    pop: '~116.262 người (NCT: ~12.100)',
+                    rate: '10,4% dân số',
                     context: 'Khu vực đang phát triển công nghiệp nhanh, thu hút nhiều lao động trẻ làm việc theo ca kíp.',
                     dilemma: 'Thời gian làm việc theo ca khiến người con khó đồng hành cùng lịch sinh hoạt của cha mẹ già, dễ nảy sinh cảm giác áy náy.'
                 },
@@ -1342,8 +1416,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 3 Phường/Xã',
                     title: 'Huyện Chơn Thành',
                     wards: '3 đơn vị: Minh Hưng, Chơn Thành, Nha Bích.',
-                    pop: '~10.200 người',
-                    rate: '9,8% dân số',
+                    pop: '~121.083 người (NCT: ~11.100)',
+                    rate: '9,2% dân số',
                     context: 'Cửa ngõ công nghiệp sôi động nối liền Bắc - Nam tỉnh Đồng Nai mới, tập trung rất đông các gia đình trẻ.',
                     dilemma: 'Guồng quay công việc công nghiệp hối hả khiến người trẻ luôn tìm kiếm giải pháp chăm sóc cha mẹ chu toàn, ấm áp nhất.'
                 },
@@ -1351,8 +1425,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 4 Xã',
                     title: 'Huyện Đồng Phú',
                     wards: '4 đơn vị: Thuận Lợi, Đồng Tâm, Tân Lợi, Đồng Phú.',
-                    pop: '~11.600 người',
-                    rate: '11,3% dân số',
+                    pop: '~120.151 người (NCT: ~11.400)',
+                    rate: '9,5% dân số',
                     context: 'Vùng đất kết nối trực tiếp giữa khu vực Đồng Xoài và Vĩnh Cửu - Trị An, không gian sống hài hòa giữa đô thị và sinh thái.',
                     dilemma: 'Gia đình trẻ vừa lo lập nghiệp vừa thương cha mẹ ở nhà vắng vẻ, thiếu người trò chuyện sớm hôm.'
                 },
@@ -1360,8 +1434,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 4 Xã/Phường',
                     title: 'Huyện Vĩnh Cửu & Khu vực Hồ Trị An',
                     wards: '4 đơn vị: Trị An, Tân Triều, Tân An, Phú Lý.',
-                    pop: '~18.900 người',
-                    rate: '12,6% dân số',
+                    pop: '~212.400 người (NCT: ~24.400)',
+                    rate: '11,5% dân số',
                     context: 'Bao quanh Hồ Trị An thơ mộng và làng bưởi Tân Triều lâu đời, không gian thiên nhiên yên bình bậc nhất tỉnh.',
                     dilemma: 'Đây là môi trường lý tưởng cho tuổi già nghỉ ngơi, nhưng định kiến xã hội vẫn khiến nhiều người con ngần ngại khi nghĩ đến mô hình an dưỡng tập trung.'
                 },
@@ -1369,8 +1443,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 5 Xã',
                     title: 'Huyện Tân Phú',
                     wards: '5 đơn vị: Tân Phú, Phú Lâm, Tà Lài, Nam Cát Tiên, Đak Lua.',
-                    pop: '~20.400 người',
-                    rate: '13,2% dân số',
+                    pop: '~182.000 người (NCT: ~22.000)',
+                    rate: '12,1% dân số',
                     context: 'Vùng đất cửa ngõ Vườn quốc gia Cát Tiên xanh mát, nhiều thanh niên đi học và làm việc tại trung tâm Biên Hòa hoặc TP.HCM.',
                     dilemma: 'Nhiều ngôi nhà ở quê chỉ còn ông bà lớn tuổi nương tựa vào nhau, con cái ở xa luôn lo lắng mỗi khi trái gió trở trời.'
                 },
@@ -1378,8 +1452,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 5 Xã',
                     title: 'Huyện Định Quán',
                     wards: '5 đơn vị: Định Quán, La Ngà, Phú Vinh, Phú Hòa, Thanh Sơn.',
-                    pop: '~24.100 người',
-                    rate: '13,0% dân số',
+                    pop: '~225.000 người (NCT: ~27.700)',
+                    rate: '12,3% dân số',
                     context: 'Khu vực ven sông La Ngà và đá Ba Chồng, cộng đồng dân cư hiền hòa, trọng lễ nghĩa gia đình.',
                     dilemma: 'Người lớn tuổi sợ làm phiền con cháu đang vất vả lập nghiệp nên thường giấu những cơn đau mỏi của tuổi già.'
                 },
@@ -1387,8 +1461,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 3 Xã',
                     title: 'Huyện Thống Nhất',
                     wards: '3 đơn vị: Dầu Giây, Gia Kiệm, Thống Nhất.',
-                    pop: '~19.500 người',
-                    rate: '13,7% dân số',
+                    pop: '~195.540 người (NCT: ~25.000)',
+                    rate: '12,8% dân số',
                     context: 'Cộng đồng dân cư có truyền thống gắn kết gia đình và tôn giáo rất sâu sắc, nếp sống hiếu đạo được gìn giữ kỹ lưỡng.',
                     dilemma: 'Định kiến làng xóm về việc cha mẹ phải ở tại nhà cùng con cái rất cao, khiến người trẻ chịu nhiều áp lực tâm lý nếu không đủ thời gian chăm sóc.'
                 },
@@ -1396,8 +1470,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 5 Xã',
                     title: 'Huyện Trảng Bom',
                     wards: '5 đơn vị: Trảng Bom, Bình Minh, An Viễn, Bàu Hàm, Hưng Thịnh.',
-                    pop: '~32.800 người',
-                    rate: '10,5% dân số',
+                    pop: '~325.907 người (NCT: ~33.200)',
+                    rate: '10,2% dân số',
                     context: 'Khu vực phát triển công nghiệp và đô thị vệ tinh nhanh chóng, tập trung hàng chục nghìn gia đình trẻ.',
                     dilemma: 'Áp lực công việc toàn thời gian và chăm sóc con nhỏ khiến thế hệ ở giữa ("thế hệ sandwich") luôn mong có điểm tựa chăm sóc tinh thần cho cha mẹ.'
                 },
@@ -1405,8 +1479,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 6 Xã',
                     title: 'Huyện Xuân Lộc',
                     wards: '6 đơn vị: Xuân Lộc, Xuân Hòa, Xuân Phú, Xuân Định, Xuân Thành, Xuân Bắc.',
-                    pop: '~29.700 người',
-                    rate: '13,5% dân số',
+                    pop: '~262.000 người (NCT: ~33.000)',
+                    rate: '12,6% dân số',
                     context: 'Vùng đất quanh danh thắng Núi Chứa Chan (Gia Lào), nông thôn mới kiểu mẫu khang trang, yên bình.',
                     dilemma: 'Con cái đi làm xa luôn mong cha mẹ ở quê có những người bạn đồng niên cùng sinh hoạt văn nghệ, dưỡng sinh mỗi ngày.'
                 },
@@ -1414,8 +1488,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 5 Xã',
                     title: 'Huyện Cẩm Mỹ',
                     wards: '5 đơn vị: Cẩm Mỹ, Xuân Quế, Sông Ray, Xuân Đông, Xuân Đường.',
-                    pop: '~18.200 người',
-                    rate: '12,8% dân số',
+                    pop: '~168.000 người (NCT: ~21.000)',
+                    rate: '12,5% dân số',
                     context: 'Vùng nông nghiệp trù phú, yên ả, người dân giữ gìn nếp sống gia đình truyền thống đậm nét.',
                     dilemma: 'Khi người trẻ rời quê vào các khu đô thị làm việc, nỗi cô đơn tuổi xế chiều của cha mẹ ở quê là bài toán cần sự thấu cảm của toàn xã hội.'
                 },
@@ -1423,8 +1497,8 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 5 Xã',
                     title: 'Huyện Long Thành',
                     wards: '5 đơn vị: Long Thành, An Phước, Bình An, Long Phước, Phước Thái.',
-                    pop: '~26.400 người',
-                    rate: '11,1% dân số',
+                    pop: '~285.600 người (NCT: ~29.700)',
+                    rate: '10,4% dân số',
                     context: 'Khu vực đô thị sân bay phát triển năng động từng ngày, giao thoa mạnh mẽ giữa nếp sống truyền thống và hiện đại.',
                     dilemma: 'Nhiều gia đình tái định cư hoặc chuyển sang nhịp sống đô thị mới, người lớn tuổi rất cần không gian gắn kết cộng đồng để không bị lạc lõng.'
                 },
@@ -1432,18 +1506,18 @@
                     badge: 'Tỉnh Đồng Nai (Mới) - 3 Xã',
                     title: 'Huyện Nhơn Trạch',
                     wards: '3 đơn vị: Nhơn Trạch, Đại Phước, Phước An.',
-                    pop: '~19.800 người',
+                    pop: '~268.500 người (NCT: ~26.600)',
                     rate: '9,9% dân số',
                     context: 'Đô thị công nghiệp ven sông sát TP.HCM, dân số trẻ đông đảo làm việc tại các khu công nghiệp.',
                     dilemma: 'Cha mẹ từ quê lên ở cùng con cháu trong các khu nhà phố thường cảm thấy ngột ngạt, thiếu không gian xanh và bạn già tâm sự.'
                 }
             },
-            vietnam: {
+vietnam: {
                 taybacbo: {
                     badge: 'Vùng Địa Lý Việt Nam',
                     title: 'Vùng Tây Bắc Bộ',
                     wards: 'Bao gồm các tỉnh miền núi phía Tây Bắc (Lào Cai, Yên Bái, Điện Biên, Hòa Bình, Lai Châu, Sơn La).',
-                    pop: '~580.000 người',
+                    pop: '~ 8,4 triệu người (TD & MN phía Bắc)',
                     rate: '11,2% dân số',
                     context: 'Vùng núi cao giàu bản sắc văn hóa dân tộc, truyền thống đại gia đình nhiều thế hệ quây quần bên bếp lửa.',
                     dilemma: 'Nhiều thanh niên xuống miền xuôi làm việc tại các khu công nghiệp, để lại cha mẹ già và con nhỏ nơi bản làng xa xôi.'
@@ -1452,7 +1526,7 @@
                     badge: 'Vùng Địa Lý Việt Nam',
                     title: 'Vùng Đông Bắc Bộ',
                     wards: 'Bao gồm các tỉnh trung du và miền núi Đông Bắc (Phú Thọ, Thái Nguyên, Tuyên Quang, Hà Giang, Cao Bằng, Lạng Sơn, Bắc Giang, Quảng Ninh...).',
-                    pop: '~1,15 triệu người',
+                    pop: '~ 8,4 triệu người (TD & MN phía Bắc)',
                     rate: '13,4% dân số',
                     context: 'Nơi lưu giữ đậm nét văn hóa cội nguồn Đất Tổ và truyền thống hiếu nghĩa dòng tộc.',
                     dilemma: 'Sự dịch chuyển lao động trẻ về các đô thị lớn khiến nhiều ngôi nhà ở quê vắng tiếng cười nói mỗi ngày thường.'
@@ -1461,7 +1535,7 @@
                     badge: 'Vùng Địa Lý Việt Nam',
                     title: 'Đồng Bằng Sông Hồng',
                     wards: 'Bao gồm Thủ đô Hà Nội, Hải Phòng, Quảng Ninh và các tỉnh châu thổ sông Hồng.',
-                    pop: '~3,2 triệu người',
+                    pop: '~ 24,8 triệu người',
                     rate: '15,2% dân số',
                     context: 'Một trong những vùng có tỷ lệ người cao tuổi cao nhất cả nước. Nếp sống trọng lễ giáo, gia phong rất sâu sắc.',
                     dilemma: 'Định kiến họ hàng và làng xóm còn nặng nề khiến nhiều người con dù quá tải công việc vẫn ngần ngại tìm kiếm không gian an dưỡng cho cha mẹ.'
@@ -1470,7 +1544,7 @@
                     badge: 'Vùng Địa Lý Việt Nam',
                     title: 'Vùng Bắc Trung Bộ',
                     wards: 'Bao gồm Thanh Hóa, Nghệ An, Hà Tĩnh, Quảng Bình, Quảng Trị, Thừa Thiên Huế.',
-                    pop: '~1,68 triệu người',
+                    pop: '~ 11,5 triệu người',
                     rate: '15,4% dân số',
                     context: 'Vùng đất hiếu học và giàu nghị lực, lượng lớn người trẻ đi lập nghiệp tại miền Nam hoặc nước ngoài.',
                     dilemma: 'Tình trạng "làng quê vắng người trẻ" khá phổ biến; những người con xa quê luôn trăn trở làm sao để cha mẹ ở nhà có người bầu bạn, chăm sóc.'
@@ -1479,7 +1553,7 @@
                     badge: 'Vùng Địa Lý Việt Nam',
                     title: 'Vùng Nam Trung Bộ & Tây Nguyên',
                     wards: 'Bao gồm Đà Nẵng, Quảng Nam, Quảng Ngãi, Bình Định, Phú Yên, Khánh Hòa, Ninh Thuận, Bình Thuận và khu vực cao nguyên.',
-                    pop: '~1,95 triệu người',
+                    pop: '~ 9,8 triệu (NTB) & ~ 6,2 triệu (TN)',
                     rate: '13,1% dân số',
                     context: 'Không gian biển và cao nguyên ôn hòa, người dân giàu tình cảm gia đình, coi trọng đạo lý "Uống nước nhớ nguồn".',
                     dilemma: 'Nhịp sống đô thị hóa nhanh tại các thành phố du lịch - dịch vụ khiến quỹ thời gian con cái dành cho cha mẹ già ngày càng thu hẹp.'
@@ -1488,7 +1562,7 @@
                     badge: 'Vùng Địa Lý Việt Nam',
                     title: 'Vùng Đông Nam Bộ (Tâm điểm Đồng Nai & TP.HCM)',
                     wards: 'Bao gồm TP. Hồ Chí Minh, Tỉnh Đồng Nai (mới), Bà Rịa - Vũng Tàu, Bình Dương, Tây Ninh.',
-                    pop: '~2,1 triệu người',
+                    pop: '~ 19,5 triệu người',
                     rate: '11,4% dân số',
                     context: 'Đầu tàu kinh tế sôi động nhất cả nước. Người trẻ chịu áp lực công việc cực lớn, không gian sống đô thị bận rộn.',
                     dilemma: 'Giới trẻ Đông Nam Bộ rất thương cha mẹ và có tư duy văn minh, nhưng vẫn bị kẹt giữa guồng quay mưu sinh và nỗi sợ định kiến xã hội khi nhắc đến nơi an dưỡng tuổi già.'
@@ -1497,7 +1571,7 @@
                     badge: 'Vùng Địa Lý Việt Nam',
                     title: 'Tây Nam Bộ (Đồng Bằng Sông Cửu Long)',
                     wards: 'Bao gồm TP. Cần Thơ và các tỉnh miền Tây sông nước.',
-                    pop: '~2,55 triệu người',
+                    pop: '~ 17,7 triệu người',
                     rate: '14,9% dân số',
                     context: 'Vùng có tốc độ già hóa dân số nhanh do thanh niên di cư lên Đông Nam Bộ làm việc. Con người miền Tây trọng nghĩa tình, hiếu thảo.',
                     dilemma: 'Cha mẹ già ở quê thường sống trầm lặng chờ con cháu về dịp lễ Tết, rất cần những không gian sinh hoạt cộng đồng ấm áp tình người.'
@@ -1550,7 +1624,6 @@
                 updateMapInfo('vietnam', 'dongnambo');
             }
         }
-
         // 4. Xử lý khi người dùng gửi phiếu khảo sát nhanh
         function handleSurveySubmit(e) {
             e.preventDefault();
