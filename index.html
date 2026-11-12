@@ -1047,7 +1047,7 @@
             </div>
         </section>
 <!-- ==========================================
-               MỤC 4: KHẢO SÁT NHU CẦU
+               MỤC 4: KHẢO SÁT NHU CẦU (ĐỒNG BỘ GOOGLE SHEETS)
         =========================================== -->
         <section id="tab-survey" class="tab-section py-12">
             <div class="max-w-7xl mx-auto px-4">
@@ -1059,11 +1059,11 @@
                         Khảo Sát Nhu Cầu Nơi Ở Tuổi Xế Chiều
                     </h2>
                     <p class="text-stone-600 text-sm sm:text-base">
-                        Mỗi ý kiến đóng góp của bạn đều giúp cộng đồng thấu hiểu hơn tâm tư của người trẻ và người lớn tuổi, đồng thời cập nhật trực tiếp vào bảng xếp hạng các tỉnh/thành phố bên phải.
+                        Mỗi ý kiến đóng góp của bạn đều được lưu trực tiếp lên hệ thống chung và cập nhật tức thì vào bảng xếp hạng các tỉnh/thành phố cho tất cả mọi người cùng theo dõi.
                     </p>
                 </div>
 
-                <!-- Bố cục 2 cột: Trái (Form khảo sát) | Phải (Bảng xếp hạng Top 5 & Biểu đồ tỉnh thành tự động tăng) -->
+                <!-- Bố cục 2 cột: Trái (Form khảo sát) | Phải (Bảng xếp hạng Top 5 & Biểu đồ tỉnh thành đồng bộ) -->
                 <div class="grid lg:grid-cols-12 gap-8 items-start">
                     
                     <!-- CỘT TRÁI (7 CỘT): FORM KHẢO SÁT -->
@@ -1168,15 +1168,15 @@
                             </label>
                             <div class="grid sm:grid-cols-3 gap-3">
                                 <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 cursor-pointer hover:bg-bamboo-50 transition">
-                                    <input type="radio" name="survey-target" value="Cho ông bà, cha mẹ" required class="text-bamboo-700">
+                                    <input type="radio" name="survey-target" value="Cha mẹ" required class="text-bamboo-700">
                                     <span class="text-sm text-stone-700">Cho ông bà, cha mẹ</span>
                                 </label>
                                 <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 cursor-pointer hover:bg-bamboo-50 transition">
-                                    <input type="radio" name="survey-target" value="Cho bản thân trong tương lai" class="text-bamboo-700">
+                                    <input type="radio" name="survey-target" value="Bản thân" class="text-bamboo-700">
                                     <span class="text-sm text-stone-700">Cho chính bản thân</span>
                                 </label>
                                 <label class="flex items-center gap-3 p-3.5 rounded-xl border border-stone-200 cursor-pointer hover:bg-bamboo-50 transition">
-                                    <input type="radio" name="survey-target" value="Cho cả cha mẹ và bản thân" class="text-bamboo-700">
+                                    <input type="radio" name="survey-target" value="Bản thân & Cha mẹ" class="text-bamboo-700">
                                     <span class="text-sm text-stone-700">Cả cha mẹ &amp; bản thân</span>
                                 </label>
                             </div>
@@ -1221,11 +1221,16 @@
                         </div>
                     </form>
 
-                    <!-- CỘT PHẢI (5 CỘT): BẢNG XẾP HẠNG & BIỂU ĐỒ NƠI Ở TỰ ĐỘNG TĂNG -->
+                    <!-- CỘT PHẢI (5 CỘT): BẢNG XẾP HẠNG ĐỒNG BỘ TẤT CẢ CÁC MÁY -->
                     <div class="lg:col-span-5 lg:sticky lg:top-24 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-warm-200">
-                        <h3 class="font-serif text-2xl font-bold text-bamboo-800 mb-4 pb-3 border-b border-stone-100">
-                            📊 Biểu Đồ Nơi Ở Người Khảo Sát
-                        </h3>
+                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-stone-100">
+                            <h3 class="font-serif text-2xl font-bold text-bamboo-800">
+                                📊 Biểu Đồ Nơi Ở Người Khảo Sát
+                            </h3>
+                            <span id="survey-sync-badge" class="text-[11px] font-medium px-2.5 py-1 rounded-full bg-bamboo-50 text-bamboo-700">
+                                Đang đồng bộ...
+                            </span>
+                        </div>
 
                         <!-- Tổng số lượt tham gia -->
                         <div class="flex items-center justify-between bg-bamboo-50 border border-bamboo-200 px-4 py-3 rounded-2xl mb-3">
@@ -1257,8 +1262,11 @@
                 </div>
             </div>
 
-            <!-- SCRIPT XỬ LÝ TỰ ĐỘNG CẬP NHẬT KHẢO SÁT & XẾP HẠNG TOP 5 TỈNH THÀNH -->
+            <!-- SCRIPT ĐỒNG BỘ DỮ LIỆU TRỰC TIẾP VỚI GOOGLE SHEETS -->
             <script>
+                // ⚠️ DÁN LINK WEB APP URL (đuôi /exec) CỦA BRO VÀO GIỮA 2 DẤU NHÁY ĐƠN BÊN DƯỚI:
+                const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyQWmBoRvliilARpW4FBugpxaW1m8L2eKs1XDHmawZasT3kbHWEHFC2hmb4Yx2Clr9Tmw/exec';
+
                 const ALL_63_PROVINCES = [
                     "Đồng Nai", "TP. Hồ Chí Minh", "Hà Nội", "Bình Dương", "Đà Nẵng",
                     "Bà Rịa - Vũng Tàu", "Bình Phước", "Cần Thơ", "Lâm Đồng", "Khánh Hòa",
@@ -1275,36 +1283,14 @@
                     "Điện Biên", "Sơn La", "Hòa Bình"
                 ];
 
-                const SURVEY_STORAGE_KEY = 'noi_binh_yen_province_stats_v2';
-                const SURVEY_LAST_EVENT_KEY = 'noi_binh_yen_last_submission_v2';
+                let sharedStats = {};
+                let sharedLastSubmission = null;
                 let isShowingAllProvinces = false;
+                let lastHighlightedProvince = '';
 
-                // Lấy dữ liệu thống kê các tỉnh từ bộ nhớ trình duyệt
-                function getSurveyStats() {
-                    let saved = {};
-                    try {
-                        const raw = localStorage.getItem(SURVEY_STORAGE_KEY);
-                        if (raw) saved = JSON.parse(raw);
-                    } catch (e) {
-                        saved = {};
-                    }
-                    const stats = {};
-                    ALL_63_PROVINCES.forEach(prov => {
-                        stats[prov] = Number(saved[prov]) || 0;
-                    });
-                    return stats;
-                }
-
-                // Lưu dữ liệu thống kê
-                function saveSurveyStats(stats) {
-                    try {
-                        localStorage.setItem(SURVEY_STORAGE_KEY, JSON.stringify(stats));
-                    } catch (e) {}
-                }
-
-                // Vẽ bảng xếp hạng (Mặc định Top 5, bấm nút sẽ mở rộng cả 63 tỉnh)
-                function renderSurveyRankingChart(highlightProvince = '') {
-                    const stats = getSurveyStats();
+                // Vẽ bảng xếp hạng (Top 5 hoặc Toàn bộ 63 tỉnh)
+                function renderSurveyRankingChart(highlightProvince = lastHighlightedProvince) {
+                    lastHighlightedProvince = highlightProvince;
                     const container = document.getElementById('survey-chart-container');
                     const totalEl = document.getElementById('survey-total-count');
                     const labelEl = document.getElementById('survey-filter-label');
@@ -1313,11 +1299,14 @@
 
                     if (!container || !totalEl) return;
 
-                    // Tính tổng số người tham gia
+                    const stats = {};
+                    ALL_63_PROVINCES.forEach(prov => {
+                        stats[prov] = Number(sharedStats[prov]) || 0;
+                    });
+
                     const totalParticipants = Object.values(stats).reduce((sum, val) => sum + val, 0);
                     totalEl.textContent = totalParticipants.toLocaleString('vi-VN') + ' người';
 
-                    // Sắp xếp các tỉnh theo số người khảo sát giảm dần
                     const sortedProvinces = ALL_63_PROVINCES.map((prov, index) => ({
                         name: prov,
                         count: stats[prov] || 0,
@@ -1327,29 +1316,23 @@
                         return a.defaultOrder - b.defaultOrder;
                     });
 
-                    // Hiển thị thông báo người khảo sát gần nhất nếu có
-                    try {
-                        const lastSubRaw = localStorage.getItem(SURVEY_LAST_EVENT_KEY);
-                        if (lastSubRaw && liveFeedEl) {
-                            const lastSub = JSON.parse(lastSubRaw);
-                            const rankIndex = sortedProvinces.findIndex(p => p.name === lastSub.location) + 1;
-                            const currentProvCount = stats[lastSub.location] || 1;
-                            liveFeedEl.classList.remove('hidden');
-                            liveFeedEl.innerHTML = `
-                                <div class="flex items-start gap-2">
-                                    <span class="text-base leading-none">🔔</span>
-                                    <div>
-                                        <span class="font-bold text-bamboo-800">Mới cập nhật:</span>
-                                        1 người vừa hoàn thành khảo sát tại <strong class="text-bamboo-800">${lastSub.location}</strong>
-                                        (${lastSub.name} – ${lastSub.age}).<br>
-                                        <span class="text-stone-600">Hiện <strong>${lastSub.location}</strong> có <strong>${currentProvCount} người</strong> tham gia • Đang xếp <strong>Hạng #${rankIndex}</strong>.</span>
-                                    </div>
+                    if (sharedLastSubmission && sharedLastSubmission.location && liveFeedEl) {
+                        const rankIndex = sortedProvinces.findIndex(p => p.name === sharedLastSubmission.location) + 1;
+                        const currentProvCount = stats[sharedLastSubmission.location] || 1;
+                        liveFeedEl.classList.remove('hidden');
+                        liveFeedEl.innerHTML = `
+                            <div class="flex items-start gap-2">
+                                <span class="text-base leading-none">🔔</span>
+                                <div>
+                                    <span class="font-bold text-bamboo-800">Mới cập nhật:</span>
+                                    1 người vừa hoàn thành khảo sát tại <strong class="text-bamboo-800">${sharedLastSubmission.location}</strong>
+                                    (${sharedLastSubmission.name}${sharedLastSubmission.age ? ' – ' + sharedLastSubmission.age : ''}).<br>
+                                    <span class="text-stone-600">Hiện <strong>${sharedLastSubmission.location}</strong> có <strong>${currentProvCount} người</strong> tham gia • Đang xếp <strong>Hạng #${rankIndex}</strong>.</span>
                                 </div>
-                            `;
-                        }
-                    } catch (e) {}
+                            </div>
+                        `;
+                    }
 
-                    // Cập nhật nhãn và nút bấm
                     if (isShowingAllProvinces) {
                         labelEl.textContent = '📋 Đang hiện tất cả 63 tỉnh/thành phố';
                         toggleBtn.textContent = 'Thu gọn (Hiện Top 5)';
@@ -1358,7 +1341,6 @@
                         toggleBtn.textContent = 'Xem tất cả 63 tỉnh';
                     }
 
-                    // Cắt danh sách: Top 5 hoặc toàn bộ 63 tỉnh
                     const displayList = isShowingAllProvinces ? sortedProvinces : sortedProvinces.slice(0, 5);
                     const maxCount = Math.max(...sortedProvinces.map(p => p.count), 1);
 
@@ -1368,7 +1350,6 @@
                         const barWidth = item.count > 0 ? Math.max(Math.round((item.count / maxCount) * 100), 8) : 0;
                         const isHighlighted = item.name === highlightProvince;
 
-                        // Huy hiệu thứ hạng
                         let rankBadgeClass = 'bg-stone-100 text-stone-600';
                         if (rank === 1 && item.count > 0) rankBadgeClass = 'bg-amber-400 text-white';
                         else if (rank === 2 && item.count > 0) rankBadgeClass = 'bg-stone-300 text-stone-800';
@@ -1397,61 +1378,110 @@
                     }).join('');
                 }
 
-                // Chuyển đổi giữa chế độ Top 5 và Tất cả 63 tỉnh
                 function toggleTop5OrAllProvinces() {
                     isShowingAllProvinces = !isShowingAllProvinces;
                     renderSurveyRankingChart();
                 }
 
-                // Xử lý khi người dùng bấm Gửi khảo sát
-                function handlePeacefulSurveySubmit(event) {
+                // Tải dữ liệu chung từ Google Sheets về máy
+                async function fetchSurveyStatsFromSheet() {
+                    const badge = document.getElementById('survey-sync-badge');
+                    if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes('DÁN_LINK')) {
+                        if (badge) badge.textContent = 'Chưa gắn link Sheet';
+                        renderSurveyRankingChart();
+                        return;
+                    }
+                    try {
+                        const res = await fetch(GOOGLE_SCRIPT_URL + '?t=' + Date.now());
+                        const data = await res.json();
+                        if (data && data.status === 'success') {
+                            sharedStats = data.stats || {};
+                            sharedLastSubmission = data.lastSubmission || null;
+                            if (badge) badge.textContent = '🟢 Đã đồng bộ trực tuyến';
+                            renderSurveyRankingChart();
+                        }
+                    } catch (err) {
+                        if (badge) badge.textContent = 'Đang kết nối...';
+                    }
+                }
+
+                // Gửi dữ liệu khảo sát mới lên Google Sheets
+                async function handlePeacefulSurveySubmit(event) {
                     event.preventDefault();
 
-                    const nameEl = document.getElementById('survey-name');
-                    const ageEl = document.getElementById('survey-age');
-                    const locEl = document.getElementById('survey-location');
+                    const submitBtn = document.getElementById('survey-submit-btn');
                     const statusMsg = document.getElementById('survey-status-msg');
 
-                    const name = nameEl ? nameEl.value.trim() : 'Ẩn danh';
-                    const age = ageEl ? ageEl.value : '';
-                    const location = locEl ? locEl.value : '';
+                    const name = document.getElementById('survey-name').value.trim() || 'Ẩn danh';
+                    const age = document.getElementById('survey-age').value;
+                    const location = document.getElementById('survey-location').value;
+                    const targetEl = document.querySelector('input[name="survey-target"]:checked');
+                    const wishEl = document.querySelector('input[name="survey-wish"]:checked');
+                    const note = document.getElementById('survey-note').value.trim();
 
                     if (!location) return;
 
-                    // Cộng +1 cho tỉnh vừa chọn
-                    const stats = getSurveyStats();
-                    stats[location] = (stats[location] || 0) + 1;
-                    saveSurveyStats(stats);
+                    const payload = {
+                        name: name,
+                        age: age,
+                        location: location,
+                        target: targetEl ? targetEl.value : '',
+                        wish: wishEl ? wishEl.value : '',
+                        note: note
+                    };
 
-                    // Lưu thông tin lượt khảo sát mới nhất
-                    try {
-                        localStorage.setItem(SURVEY_LAST_EVENT_KEY, JSON.stringify({
-                            name: name,
-                            age: age,
-                            location: location,
-                            time: new Date().toLocaleTimeString('vi-VN')
-                        }));
-                    } catch (e) {}
-
-                    // Cập nhật lại bảng xếp hạng và làm nổi bật tỉnh vừa tăng
+                    // Cập nhật giao diện ngay lập tức để người dùng không phải chờ
+                    sharedStats[location] = (Number(sharedStats[location]) || 0) + 1;
+                    sharedLastSubmission = { name: name, age: age, location: location };
                     renderSurveyRankingChart(location);
 
-                    // Hiện thông báo xác nhận dưới nút bấm
-                    if (statusMsg) {
-                        statusMsg.textContent = `✅ Cảm ơn ${name}! Đã ghi nhận +1 người khảo sát tại ${location} vào bảng xếp hạng.`;
-                        statusMsg.classList.remove('hidden');
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.textContent = 'Đang lưu lên hệ thống...';
                     }
 
-                    // Reset form sau khi gửi
-                    document.getElementById('peaceful-survey-form').reset();
+                    try {
+                        if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes('DÁN_LINK')) {
+                            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                                body: JSON.stringify(payload)
+                            });
+                            const result = await response.json();
+                            if (result && result.status === 'success') {
+                                sharedStats = result.stats || sharedStats;
+                                sharedLastSubmission = result.lastSubmission || sharedLastSubmission;
+                                renderSurveyRankingChart(location);
+                            }
+                        }
+
+                        if (statusMsg) {
+                            statusMsg.textContent = `✅ Cảm ơn ${name}! Đã lưu vào Google Sheets và cộng +1 tại ${location}.`;
+                            statusMsg.classList.remove('hidden');
+                        }
+                        document.getElementById('peaceful-survey-form').reset();
+                    } catch (err) {
+                        if (statusMsg) {
+                            statusMsg.textContent = `✅ Đã ghi nhận khảo sát của ${name} tại ${location}!`;
+                            statusMsg.classList.remove('hidden');
+                        }
+                    } finally {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = 'Gửi kết quả khảo sát';
+                        }
+                    }
                 }
 
-                // Đồng bộ với tên hàm cũ (nếu có trong file) và khởi tạo ngay khi tải trang
                 window.submitSurveyForm = handlePeacefulSurveySubmit;
                 window.toggleAllSurveyProvinces = toggleTop5OrAllProvinces;
-                window.addEventListener('DOMContentLoaded', () => renderSurveyRankingChart());
-                window.addEventListener('load', () => renderSurveyRankingChart());
-                renderSurveyRankingChart();
+
+                // Khởi chạy ngay khi mở trang và tự động làm mới mỗi 15 giây
+                window.addEventListener('DOMContentLoaded', () => {
+                    renderSurveyRankingChart();
+                    fetchSurveyStatsFromSheet();
+                    setInterval(fetchSurveyStatsFromSheet, 15000);
+                });
             </script>
         </section>
     <!-- FOOTER -->
